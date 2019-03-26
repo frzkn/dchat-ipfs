@@ -1,0 +1,12 @@
+@tailwind preflight;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Montserrat;
+  background: #F8FAFC;
+}
