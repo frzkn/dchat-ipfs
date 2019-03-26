@@ -1,41 +1,80 @@
 import React, { Component } from "react"
-import logo from "./logo.svg"
 import "./App.css"
+
+import IPFS from 'ipfs'
+import Room from 'ipfs-pubsub-room'
+
 import Navbar from './components/Navbar'
 import ChatBox from './components/ChatBox'
 import ChatControls from './components/ChatControls'
+
+const ipfsOptions = {
+  EXPERIMENTAL: {
+    pubsub: true
+  },
+  config: {
+    Addresses: {
+      Swarm: [
+        "/dns4/ws-star.discovery.libp2p.io/tcp/443/wss/p2p-websocket-star"
+      ]
+    }
+  }
+}
+
 class App extends Component {
   constructor(props) {
     super(props)
+    this.ipfs = new IPFS(ipfsOptions)
     this.state = {
       messages: [
         {
           peer: "Admin",
-          message: "Welcome to DChat"
+          message: "Welcome to DChat, Your messages are stored on all conected IPFS nodes therfore chat persists on other nodes until browser window is closed."
         }
-      ]
+      ],
+      peers: [],
+      info: null,
+      peerCounter: 0
     }
-    this.changeState = this.changeState.bind(this)
   }
 
-  changeState(newState) {
-    this.setState({
-      messsages: newState
-    })
+  componentWillMount() {
+    this.ipfs.once('ready', () => this.ipfs.id(async (err, info) => {
+      if (err) { window.alert(err) }
+      this.setState({ info })
+      this.room = Room(this.ipfs, 'dchat-ipfs')
+      this.room.on('peer joined', (peer) => {
+        console.log(peer + " has joined")
+        this.peerCounter++;
+      })
+      this.room.on('peer left', (peer) => {
+        console.log(peer + " has left")
+      })
+      this.room.on('message', (msg) => {
+        let received = msg.data.toString('utf8')
+        let stateMessages = this.state.messages
+        stateMessages.push(JSON.parse(received))
+        this.setState({messages: stateMessages})
+      })
+    }))
   }
+
+  sendBroadcast = (data) => {
+    this.room.broadcast(data)
+  }
+
 
   render() {
     return (
-      <React.Fragment>
+      // What does fragment do? IDK I use it as a div ????? Looks cool tbh coooler than div :D okay
+      <React.Fragment >
         <div className="wrapper-container bg-grey-lightest">
-          <Navbar />
+          <Navbar peerCounter={this.state.peerCounter}/>
           <ChatBox messages={this.state.messages} />
-          <ChatControls messages={this.state.messages} changeState={this.changeState} />
+          <ChatControls messages={this.state.messages} sendBroadcast={this.sendBroadcast} />
         </div>
-      </React.Fragment>
+      </React.Fragment >
     )
   }
 }
-
-
 export default App

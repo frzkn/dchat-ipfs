@@ -3,14 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "browserify": "^16.2.3",
+    "ipfs": "^0.34.4",
+    "ipfs-pubsub-room": "^1.4.1",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-scripts": "2.1.8"
   },
   "scripts": {
-
     "build:css": "postcss src/tailwind.css -o src/index.css",
     "watch:css": "postcss src/tailwind.css -o src/index.css -w",
+    "compile": "browserify src/ipfsmain.js -o public/js/ipfsmain.js -d",
     "start": "npm run watch:css & react-scripts start",
     "build": "npm run build:css && react-scripts build",
     "test": "react-scripts test",
