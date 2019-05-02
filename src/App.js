@@ -44,6 +44,8 @@ class App extends Component {
       this.setState({ info })
       this.room = Room(this.ipfs, 'dchat-ipfs')
       this.room.on('peer joined', (peer) => {
+        console.warn('PEER LIST')
+        console.log(this.room.getPeers())
         console.log(peer + " has joined")
         this.peerCounter++;
       })
@@ -66,7 +68,6 @@ class App extends Component {
 
   render() {
     return (
-      // What does fragment do? IDK I use it as a div ????? Looks cool tbh coooler than div :D okay
       <React.Fragment >
         <div className="wrapper-container bg-grey-lightest">
           <Navbar peerCounter={this.state.peerCounter}/>
