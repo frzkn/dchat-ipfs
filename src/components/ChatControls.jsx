@@ -40,7 +40,7 @@ export default class ChatControls extends Component {
 
           <img
             src={require("../send.svg")}
-            className="bg-green hover:bg-green-light cursor-pointer h-12 w-12 border-white border-5 p-2 my-auto  mr-2 md:mr-8     rounded-full"
+            className="bg-green gradient hover:bg-green-light cursor-pointer h-12 w-12 border-white border-5 p-2 my-auto  mr-2 md:mr-8     rounded-full"
             onClick={this.sendMessage} alt="send"
           />
         </div>

@@ -1,3 +1,23 @@
+html {
+    overflow-y: scroll;
+}
+
+.gradient {
+  background: rgba(67,233,123,1);
+  background: -moz-linear-gradient(right, rgba(67,233,123,1) 0%, rgba(37,219,131,1) 100%);
+  background: -webkit-gradient(right top, left top, color-stop(0%, rgba(67,233,123,1)), color-stop(100%, rgba(37,219,131,1)));
+  background: -webkit-linear-gradient(right, rgba(67,233,123,1) 0%, rgba(37,219,131,1) 100%);
+  background: -o-linear-gradient(right, rgba(67,233,123,1) 0%, rgba(37,219,131,1) 100%);
+  background: -ms-linear-gradient(right, rgba(67,233,123,1) 0%, rgba(37,219,131,1) 100%);
+  background: linear-gradient(to left, rgba(67,233,123,1) 0%, rgba(37,219,131,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#43e97b', endColorstr='#25db83', GradientType=1 );
+}
+
+.green-color {
+  background: rgb(39,220,131);
+  fill:green;
+}
+
 .App {
   text-align: center;
 }
