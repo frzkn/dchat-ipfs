@@ -26,6 +26,7 @@ class App extends Component {
     super(props)
     this.ipfs = new IPFS(ipfsOptions)
     this.state = {
+      room: null,
       messages: [
         {
           peer: "Admin",
@@ -42,7 +43,11 @@ class App extends Component {
     this.ipfs.once('ready', () => this.ipfs.id(async (err, info) => {
       if (err) { window.alert(err) }
       this.setState({ info })
-      this.room = Room(this.ipfs, 'dchat-ipfs')
+      this.room = Room(this.ipfs, 'dchat-ipfs-1')
+      this.setState({
+        ...this.state,
+        room: this.room
+      })
       this.room.on('peer joined', (peer) => {
         console.warn('PEER LIST')
         console.log(this.room.getPeers())
@@ -62,13 +67,15 @@ class App extends Component {
   }
 
   sendBroadcast = (data) => {
-    this.room.broadcast(data)
+    this.state.room.broadcast(data)
   }
 
 
   render() {
+
     return (
       <React.Fragment >
+
         <div className="wrapper-container bg-grey-lightest">
           <Navbar peerCounter={this.state.peerCounter}/>
           <ChatBox messages={this.state.messages} />

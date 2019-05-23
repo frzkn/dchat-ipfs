@@ -13,12 +13,13 @@ export default class ChatControls extends Component {
       this.props.sendBroadcast(JSON.stringify(newObj))
     }
   }
+
   render() {
     return (
       <div className="">
         <div className="flex w-screen mx-auto fixed pin-b container mx-auto justify-around pin-l pin-r bg-white border-t-2 rounded-t-xl border-green ">
           <div className="flex-col md:flex p-2 ">
-            <form class="flex-col" onSubmit={this.sendMessage}>
+            <form className="flex-col" onSubmit={this.sendMessage}>
               <input
                 type="text"
                 className="p-2 border-green rounded-full capitalize block font-bold my-1"
@@ -32,7 +33,7 @@ export default class ChatControls extends Component {
                 ref="message"
               />
               <input
-                class="invisible"
+                className="invisible"
                 type="submit"
                 />
             </form>
