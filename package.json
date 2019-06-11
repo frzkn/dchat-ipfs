@@ -4,8 +4,8 @@
   "private": true,
   "dependencies": {
     "browserify": "^16.2.3",
-    "ipfs": "0.34.0",
-    "ipfs-pubsub-room": "^1.2.1",
+    "ipfs": "^0.36.3",
+    "ipfs-pubsub-room": "^1.4.1",
     "react": "16.8.5",
     "react-dom": "^16.8.5",
     "react-scripts": "2.1.8"
