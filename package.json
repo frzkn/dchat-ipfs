@@ -8,7 +8,7 @@
     "ipfs-pubsub-room": "^1.4.1",
     "react": "16.8.5",
     "react-dom": "^16.8.5",
-    "react-scripts": "2.1.8"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "build:css": "postcss src/tailwind.css -o src/index.css",
